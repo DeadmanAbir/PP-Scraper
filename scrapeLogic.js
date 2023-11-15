@@ -7,7 +7,7 @@ let news=[];
 const url = `https://economictimes.indiatimes.com/tech/${link}`;
 console.log(url);
 const browser = await puppeteer.launch({
-  headless: false,
+  headless: true,
   defaultViewport: false,
 });
 const page = await browser.newPage();
