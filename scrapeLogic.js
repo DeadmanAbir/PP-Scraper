@@ -20,7 +20,7 @@ async function scrapeLogic(res, link) {
                 : puppeteer.executablePath(),
     });
     const page = await browser.newPage();
-    await page.goto(url,{timeout: 100000});
+    await page.goto(url,{timeout: 0});
     try {
 
 
