@@ -49,6 +49,7 @@ async function scrapeLogic(res, link) {
             });
         }
         res.json(news);
+        console.log("successfully news scraped")
         browser.close();
 
     } catch
