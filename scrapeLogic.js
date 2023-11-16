@@ -1,7 +1,7 @@
 
 const puppeteer = require("puppeteer");
 require('dotenv').config()
-
+const {News}=require("./db/indexDB");
 
 async function scrapeLogic(res, link) {
     let news = [];
@@ -48,14 +48,29 @@ async function scrapeLogic(res, link) {
                 link: `economictimes.indiatimes.com${link}`,
             });
         }
-        res.json(news);
+        // res.json(news);
         console.log("successfully news scraped")
-        browser.close();
+        let objs;
+        if(link=="technology"){
+           
+            await News.findByIdAndUpdate(process.env.NEWS_ID, { techNews: news });
 
-    } catch
+        }else if(link=="funding"){
+            await News.findByIdAndUpdate(process.env.NEWS_ID, { fundingNews: news });
+
+        }else if(link=="startups"){
+            await News.findByIdAndUpdate(process.env.NEWS_ID, { startupNews: news });
+
+        }
+        
+       
+        browser.close();
+        res.sendStatus(200);
+
+    } catch(e)
     {
         browser.close();
-        res.send([]);
+        res.json({message: e.message});
 
     }
     
