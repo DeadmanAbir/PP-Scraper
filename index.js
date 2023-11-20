@@ -23,10 +23,6 @@ app.get("/", (req, res) => {
 });
 
 
-cron.schedule('30 9 * * *', () => {
-  console.log('runninng cron job for scraper');
-  scrapeNewsAndSave();
-});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

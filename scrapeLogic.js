@@ -48,9 +48,7 @@ async function scrapeLogic(res, link) {
                 link: `economictimes.indiatimes.com${link}`,
             });
         }
-        // res.json(news);
         console.log("successfully news scraped")
-        let objs;
         if(link=="technology"){
            
             await News.findByIdAndUpdate(process.env.NEWS_ID, { techNews: news });
@@ -70,7 +68,7 @@ async function scrapeLogic(res, link) {
     } catch(e)
     {
         browser.close();
-        res.json({message: e.message});
+        res.status(500).send(e.message);
 
     }
     
@@ -78,7 +76,7 @@ async function scrapeLogic(res, link) {
 
 
 
-async function run(res, link, news) {
+async function run(res, link) {
     await scrapeLogic(res, link);
 
 }
